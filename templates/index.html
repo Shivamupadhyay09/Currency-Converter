@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Currency Converter</h1>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {% if error_message %}
+                    <div class="alert alert-danger">{{ error_message }}</div>
+                {% endif %}
+                <form method="POST" action="/">
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="from_currency">From</label>
+                        <select class="form-control" id="from_currency" name="from_currency" required>
+                            {% for currency in currencies %}
+                                <option value="{{ currency }}">{{ currency }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="to_currency">To</label>
+                        <select class="form-control" id="to_currency" name="to_currency" required>
+                            {% for currency in currencies %}
+                                <option value="{{ currency }}">{{ currency }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Convert</button>
+                </form>
+
+                {% if conversion_result %}
+                    <div class="mt-3">
+                        <h4 class="text-center">Converted Amount: {{ conversion_result }}</h4>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
